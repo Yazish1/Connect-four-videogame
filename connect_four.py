@@ -1,3 +1,4 @@
+import sys
 def gravity_decorator(insert_method):
     """Decorator to apply gravity to the game board after piece is placed.
     Makes pieces fall into the lowest available position after bomb or teleport.
@@ -650,3 +651,21 @@ class TeleportPiece(Piece):
         
         return True
 
+def main():
+    "Command-line interface for players"
+    if len(sys.argv) != 3:
+        print("Usage: python connect_four.py <rows> <columns>")
+        sys.exit(1)
+    
+    try:
+        rows = int(sys.argv[1])
+        columns = int(sys.argv[2])
+    except ValueError:
+        print("Please enter rows and columns as integers.")
+        sys.exit(1)
+    print(f"Starting connect four game with {rows}x{columns}")
+    print(f"Please enter the username and symbol you want to use, symbol can be either O or X.\n")
+    game = Game(rows,columns)
+    game.begin()
+if __name__ == "__main__":
+    main()
